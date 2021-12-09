@@ -10,22 +10,22 @@
             <hr> <!--created a line break-->
         </header>
 
-        <article>
-            <header>
-                <h2>Choose your selection.</h2>
-            </header>
-        </article>
-
-        <!--WHEN CLICK ON STUDENT, IT LEADS TO STUDENT INPUT-->
-        <form action="http://ecs.fullerton.edu/~cs332t14/student.html">
-            <button type="submit" value="STUDENT">STUDENT</button>
+        <form method="POST" action="student_course.php">
+            <div>
+                <label for="Course Number">Enter a Course Number: </label>
+                <input type="text" name="coursenum">
+                <input type="submit">
+            </div>
         </form>
 
         <p></p>
 
-        <!--WHEN CLICK ON PROFESSOR, IT LEADS TO PROFESSOR INPUT-->
-        <form action="http://ecs.fullerton.edu/~cs332t14/professor.html">
-            <button type="submit" value="PROFESSOR">PROFESSOR</button>
+        <form method="POST" action="student_grade.php">
+            <div>
+                <label for="CWID">Enter your CWID: </label>
+                <input type="text" name="CWID">
+                <input type="submit">
+            </div>
         </form>
 
     </body>
