@@ -1,7 +1,9 @@
 <html>
 <?php
 
-$link = mysqli_connect('mariadb', 'cs332t14', '10141854u2y4e2b', 'cs332t14');
+/*$link = mysqli_connect('mariadb', 'cs332t14', '10141854u2y4e2b', 'cs332t14');*/
+$link = mysqli_connect('mariadb', 'cs332t14', '6nXl2UmX', 'cs332t14');
+
 if (!$link) {
     die("ERROR. Unable to connect: ".mysqli_error());
 }
@@ -9,7 +11,7 @@ else {
     echo "Connected";
 }
 
-/*
+
 $cnum = $_POST["Course_Num"];
 
 $query = "SELECT CS.Section_Num, CS.Classroom, CS.Meeting_Days, CS.Beg_Time, CS.End_Time, CS.Seat_Capacity
@@ -33,7 +35,7 @@ if ($result->num_rows > 0) {
     }
     $result->free_result();
     $link->close();
-}*/
+}
 
 /*echo "<tr>";
         for ($i = 0; $i < count($row); $i++) {
