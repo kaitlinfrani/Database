@@ -2,7 +2,7 @@
     <body>
         <?php
         
-        $link = mysqli_connect('mariadb', 'cs332s30', 'iDl06Vq9','cs332s30');
+        $link = mysqli_connect('mariadb', 'cs332t14', '6nXl2UmX','cs332t14');
         if (!$link) {
             die('Could not connect: ' . mysqli_error());
         }
@@ -12,11 +12,12 @@
         }
 
         if(isset($_POST['SSN'])) {
-            $query = "SELECT * FROM COURSE;";
+            $query = "SELECT * FROM COURSE_SECTION;";
+            /*$query = "SELECT s.Course_Num, s.Classroom, s.Meeting_Days, s.Beg_Time, s.End_Time, c.Course_Num, c.Course_Title,
+                  FROM COURSE_SECTION as s, COURSE as c 
+                  WHERE s.P_SSN = '.$SSN.' AND s.Course_Num = c.Course_Num;";*/
 
-
-    
-            $result = $link->query($query);
+           // $result = $link->query($query);
 
             
             /*$row = $result->mysqli_fetch_assoc();
@@ -24,7 +25,7 @@
             echo "Title: " . $row["Course_Title"]. " - Classroom: " .$row["Classroom"]. " - Meeting days: " . $row["Meeting_Days"]. " - Start time: " . $row["Beg_Time"]. " - End time: " . $row["End_Time"].  "<br>";
 
             if ($result->num_rows > 0) */
-            if ($result) {
+            if ($result = $link->query($query)) {
                 // output data of each row
                 echo "Hi";
                 echo "SSN - " .$SSN. "<br>";
