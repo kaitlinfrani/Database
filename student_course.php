@@ -8,18 +8,23 @@
 
         $cnum = $_POST["coursenum"];
         
-         $query = "SELECT Course_Num, Section_Num, Classroom, Meeting_Days, Beg_Time, End_Time, Seat_Capacity
-         FROM COURSE_SECTION
-         WHERE Course_Num = '".$cnum."';";
+        //Output the course information
+        $query = "SELECT Course_Num, Section_Num, Classroom, Meeting_Days, Beg_Time, End_Time, Seat_Capacity
+        FROM COURSE_SECTION
+        WHERE Course_Num = '".$cnum."';";
         
         $result = $link->query($query);
 
-        if ($result = $link->query($query)) {
+        //Does a check to make sure the data inputted is correct, if not, it will output "0 results"
+        if ($result->num_rows > 0) {
+            echo "<h1>Course Information</h1>";
+            echo "Course Number Inputted: ".$cnum;
+            echo "<p></p>";
             while($row = $result->fetch_assoc()) {
                 echo "<table border = '1'>";
                 // Headings
                 echo"<tr>";
-                echo "<th>Sections </th>";
+                echo "<th>Section </th>";
                 echo "<th>Classroom </th>";
                 echo "<th>Meeting Days </th>";
                 echo "<th>Beginning Time </th>";
@@ -39,7 +44,13 @@
             }
         }
         else {
-            echo "0 results";
+            echo "<h2>0 results</h2>";
+            echo "<p></p>";
+            echo "Please try again by going back to the main page.";
+            echo "<p></p>";
+            echo "<form action='http://ecs.fullerton.edu/~cs332t14'>";
+            echo "<button type='submit' value='MAIN PAGE'>MAIN PAGE</button>";
+            echo "</form>";
         }
         
         $result->free_result();
