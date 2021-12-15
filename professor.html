@@ -10,16 +10,18 @@
             <hr> <!--created a line break-->
         </header>
 
-        <form method="POST" action="professor_course.php">
+        <!--WHEN ENTER SSN SUBMIT, IT LEADS TO PROFESSOR'S COURSES-->
+        <form  action="professor_course.php" method="POST">
             <div>
-                <label for="ssn">Enter your SSN: </label>
-                <input type="text" name="ssn">
-                <input type="submit">
+                <label for="SSN">Enter SSN: </label>
+                <input type="text" name="SSN">
+                <input type="submit"/>
             </div>
         </form>
 
         <p></p>
 
+        <!--WHEN ENTER COURSE NUM AND SECTION NUM, IT LEADS TO STUDENTS' GRADES-->
         <form method="POST" action="professor_grade.php">
             <div>
                 <label for="coursenum, sectionnum">Enter a Course Number: </label>
