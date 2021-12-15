@@ -8,15 +8,23 @@
 
         $SSN = $_POST["SSN"];
         
+        //Output the courses taught by the professor
         $query = "SELECT Course_Title, Classroom, Meeting_Days, Beg_Time, End_Time
-                  FROM COURSE_SECTION as s, COURSE as c 
-                  WHERE s.P_SSN = '".$SSN."' AND s.Course_Num = c.Course_Num;";
+        FROM COURSE_SECTION as s, COURSE as c 
+        WHERE s.P_SSN = '".$SSN."' AND s.Course_Num = c.Course_Num;";
         
+        //links query to website if correct values are inputted
         $result = $link->query($query);
 
-        if ($result = $link->query($query)) {
+        //Does a check to make sure the data inputted is correct, if not, it will output "0 results"
+        if ($result->num_rows > 0) {
+            echo "<h1>Courses Taught by Professor</h1>";
+            echo "SSN Inputted: ".$SSN;
+            echo "<p></p>";
             while($row = $result->fetch_assoc()) {
+                //Creates Table
                 echo "<table border = '1'>";
+                
                 //Headings
                 echo"<tr>";
                 echo "<th>Title </th>";
@@ -37,7 +45,13 @@
             }
         }
         else {
-            echo "0 results";
+            echo "<h2>0 results</h2>";
+            echo "<p></p>";
+            echo "Please try again by going back to the main page.";
+            echo "<p></p>";
+            echo "<form action='http://ecs.fullerton.edu/~cs332t14'>";
+            echo "<button type='submit' value='MAIN PAGE'>MAIN PAGE</button>";
+            echo "</form>";
         }
         
         $result->free_result();
