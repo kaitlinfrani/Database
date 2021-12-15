@@ -1,51 +1,60 @@
 <html>
-<?php
-
-/*$link = mysqli_connect('mariadb', 'cs332t14', '10141854u2y4e2b', 'cs332t14');*/
-$link = mysqli_connect('mariadb', 'cs332t14', '6nXl2UmX', 'cs332t14');
-
-if (!$link) {
-    die("ERROR. Unable to connect: ".mysqli_error());
-}
-else {
-    echo "Connected";
-}
-
-
-$cnum = $_POST["Course_Num"];
-
-$query = "SELECT CS.Section_Num, CS.Classroom, CS.Meeting_Days, CS.Beg_Time, CS.End_Time, CS.Seat_Capacity
-FROM COURSE_SECTION as CS, ENROLLMENT as E
-WHERE CS.Course_Num = $cnum AND CS.Course_Num = E.Course_Num AND CS.Section_Num = E.Section_Num
-GROUP BY E.Section_Num;";
-
-$result = $link->query($query);
-
-if ($result->num_rows > 0) {
-    echo "Hello";
-    while ($row = $result->fetch_assoc()) {
-        for ($i = 0; $i < $result->num_rows; $i++) {
-            echo '<tr><td alighn = "left">'.'SECTION: '.$row['Section_Num'].'<p>';
-            echo '<tr><td alighn = "left">'.'SECTION: '.$row['Classroom'].'<p>';
-            echo '<tr><td alighn = "left">'.'SECTION: '.$row['Meeting_Days'].'<p>';
-            echo '<tr><td alighn = "left">'.'SECTION: '.$row['Beg_Time'].'<p>';
-            echo '<tr><td alighn = "left">'.'SECTION: '.$row['End_Time'].'<p>';
-            echo '<tr><td alighn = "left">'.'SECTION: '.$row['Seat_Capacity'].'<p>';
+    <body>
+        <?php
+        
+        $link = mysqli_connect('mariadb', 'cs332t14', '6nXl2UmX','cs332t14');
+        if (!$link) {
+            die('Could not connect: ' . mysqli_error());
         }
-    }
-    $result->free_result();
-    $link->close();
-}
 
-/*echo "<tr>";
-        for ($i = 0; $i < count($row); $i++) {
-            echo "<td>{$row[$i]}</td>";
+        else {
+            echo "Connected Successfully.<br><br>";
         }
-        echo "</tr>";
 
-else {
-    echo "No data found.";
-}*/
+        if(isset($_POST['coursenum'])) {
+            $query = "SELECT * FROM COURSE_SECTION;";
+            /*$query = "SELECT Section_Num, Classroom, Meeting_Days, Beg_Time, End_Time, Seat_Capacity
+            FROM COURSE_SECTION, ENROLLMENT WHERE Section_Num = Section_Num AND Course_Num = '".$_POST['coursenum']."';";*/
+            /*$query = "SELECT 'Classroom', 'Meeting_Days', 'Beg_Time', 'End_Time', 'Course_Title',
+            FROM COURSE_SECTION as CS, COURSE as C
+            WHERE CS.P_SSN = '.$SSN.' AND CS.Course_Num = C.Course_Num ;";*/
 
-?>
+           // $result = $link->query($query);
+
+            if ($result = $link->query($query)) {
+                echo "Course Number: ";
+                while($row = $result->fetch_assoc()) {
+                    echo "<table border = '1'>";
+                    // Headings
+                    echo"<tr>";
+                    echo "<th>Sections </th>";
+                    echo "<th>Classroom </th>";
+                    echo "<th>Meeting Days </th>";
+                    echo "<th>Beginning Time </th>";
+                    echo "<th>End Time </th>";
+                    echo "<th>Students Enrolled </th>";
+                    echo"</tr>";
+
+                    //Details
+                    echo"<tr>";
+                    echo "<td>".$row["Section_Num"]."</td>";
+                    echo "<td>".$row["Classroom"]."</td>";
+                    echo "<td>".$row["Meeting_Days"]."</td>";
+                    echo "<td>".$row["Beg_Time"]."</td>";
+                    echo "<td>".$row["End_Time"]."</td>";
+                    echo "<td>".$row["Seat_Capacity"]."</td>";
+                    echo "</table>";
+                }
+            }
+
+            else {
+                echo "0 results";
+            }
+            
+            $result->free_result();
+            $link->close();
+            }
+
+        ?>
+    </body>
 </html>
