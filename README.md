@@ -1,7 +1,5 @@
 # University Database
 
-Website with interface created to obtain course information
-
-http://ecs.fullerton.edu/~cs332t14/
+Website with interface created to obtain course information.
 
 Languages Used: HTML, PHP, mySQL
